@@ -2,6 +2,26 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+  body.bg-white
+    
+    div.flex.items-center.justify-between.text-3xl.p-3.font-roboto.flex-wrap
+      a(href="")
+      a(href="/") Home  
+      a(href="/home/categories") Categories  
+      a(href="/home/category/create") Add new category  
+      a(href="/home/boardgame/create") Add new boardgame
+      a(href="")
+
+    main.flex.p-2.m-2
+      div.w-56.p-5.bg-gray-200.p-3.uppercase.flex.flex-col.gap-5.overflow-y-auto.h-screen.rounded.whitespace-nowrap
+        p Barra lateralllfksdlfk
+        p Barra lateralllfksdlfk
+        p Barra lateralllfksdlfk
+        p Barra lateralllfksdlfk
+      div.flex-1.ml-5
+        block content
+
+  footer.w-screen.flex.bg-white.items-center
+      p fooooooter  
