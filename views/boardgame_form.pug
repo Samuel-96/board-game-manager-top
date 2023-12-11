@@ -1,0 +1,47 @@
+extends layout 
+
+block content 
+
+    h1.text-4xl.font-bold.flex.justify-center.m-3= title 
+
+    form.flex.justify-center(method='POST' action='')
+        div.flex.flex-col.justify-center.m-5.p-5.gap-5.rounded-xl.shadow-lg.border-2.w-96
+            label.text-2xl.font-bold(for='name') Name
+            input.text-xl.p-2(type='text', placeholder='Catan, Paleo, Risk, etc...' name='name' required='true' value=(boardgame===undefined ? '' : boardgame.name))
+            
+            label.text-2xl.font-bold(for='release_year') Release year
+            input#date_of_birth.form-control(type='date' name='release_year' value=(undefined===boardgame ? '' : boardgame.release_year) )
+
+            label.text-2xl.font-bold(for='designers') Designers
+            input.text-xl.p-2(type='text', name='designers' value=(boardgame===undefined ? '' : boardgame.designers))
+
+            label.text-2xl.font-bold(for='artists') Artists
+            input.text-xl.p-2(type='text', name='artists' value=(boardgame===undefined ? '' : boardgame.artists))
+
+            label.text-2xl.font-bold(for='summary') Summary
+            textarea(name="summary", cols="30", rows="10")
+
+            label.text-2xl.font-bold(for='rating') Rating 
+            input.text-xl.p-2(type='number', name='raing' value=(boardgame===undefined ? '' : boardgame.artists))
+
+            label.text-2xl.font-bold(for='publisher') Publisher 
+            select(type='select', placeholder='Select publisher' name='publisher' required='true' )
+                for publisher in publishers 
+                    if boardgame
+                        option(value=publisher._id selected=(publisher._id.toString()===boardgame.publisher._id.toString() ? 'selected' : false) ) #{publisher.name}
+                    else
+                        option(value=publisher._id) #{publisher.name}
+
+            label.text-2xl.font-bold(for='category') Categories 
+            select(type='select', placeholder='Select category' name='category' required='true' )
+                for category in categories 
+                    if boardgame
+                        option(value=category._id selected=(category._id.toString()===boardgame.category._id.toString() ? 'selected' : false) ) #{category.name}
+                    else
+                        option(value=category._id) #{category.name}
+
+            button.btn.btn-primary.p-2.bg-green-600.text-white.rounded(type='submit') Submit
+    if errors
+        ul
+        for error in errors
+            li!= error.msg

@@ -4,22 +4,21 @@ html
     title= title
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/custom-styles.css')
   body.bg-white
     
-    div.flex.items-center.justify-between.text-3xl.p-3.font-roboto.flex-wrap
-      a(href="")
+    div.flex.items-center.justify-between.text-3xl.p-3.font-roboto.flex-wrap.bg-stone-600.text-white.uppercase.p-2
       a(href="/") Home  
-      a(href="/home/categories") Categories  
       a(href="/home/category/create") Add new category  
       a(href="/home/boardgame/create") Add new boardgame
-      a(href="")
+      a(href="/home/publisher/create") Add new publisher
 
     main.flex.p-2.m-2
-      div.w-56.p-5.bg-gray-200.p-3.uppercase.flex.flex-col.gap-5.overflow-y-auto.h-screen.rounded.whitespace-nowrap
-        p Barra lateralllfksdlfk
-        p Barra lateralllfksdlfk
-        p Barra lateralllfksdlfk
-        p Barra lateralllfksdlfk
+      if categories
+        div.w-56.p-5.bg-gray-200.p-3.uppercase.flex.flex-col.gap-5.overflow-y-auto.h-screen.rounded.whitespace-nowrap
+          each category in categories
+            a(href=category.url)= category.name
+
       div.flex-1.ml-5
         block content
 

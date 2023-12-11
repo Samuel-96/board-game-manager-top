@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+
+    each bg in boardgames 
+        div.mb-5
+            img
+            h2.text-2xl.font-bold= bg.name
+            p.text-lg= bg.summary
+            p= bg.designers 
+            p= bg.artists
+            div.p-2.bg-green-600.text-white.rounded.mt-5.w-fit
+              a(href=bg.url)= "See details"

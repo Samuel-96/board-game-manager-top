@@ -1,5 +1,6 @@
 const Publisher = require("../models/publisher");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 // Muestra lista de todos los Publishers.
 exports.publisher_list = asyncHandler(async (req, res, next) => {
@@ -8,18 +9,45 @@ exports.publisher_list = asyncHandler(async (req, res, next) => {
 
 // Muestra la pagina de detalle de un publisher.
 exports.publisher_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: publisher_detail: ${req.params.id}`);
+  const publisher = await Publisher.findById(req.params.id).exec();
+  res.render("publisher_detail", {publisher: publisher});
 });
 
 // Muestra el formualario de creacion de publishers.
 exports.publisher_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: publisher_create_get");
+  res.render("publisher_form", { title: "Create publisher" });
 });
 
-// Controla la accion de crear al publisher mediante post.
-exports.publisher_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: publisher_create_post");
-});
+// Muestra el formualario de creacion de publishers.
+exports.publisher_create_post = [
+  // validamos y  sanitizamos los datos del form
+  body("name").trim().isLength(1).escape().withMessage("First name must be specified."),
+
+  // procesamos la request despues de comprobar los datos
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const publisher = new Publisher({
+      name: req.body.name,
+    });
+
+    // comprobamos si hay errores, 
+    if (!errors.isEmpty()) {
+      // si los hay los mostramos y hacemos return
+      res.render("publisher_form", {
+        title: "Create publisher",
+        publisher: publisher,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // datos validos
+      await publisher.save();
+      // Redirect al nuevo publisher creado
+      res.redirect(publisher.url);
+    }
+  }),
+]
 
 // Muestra la vista de eliminar al pubisher mediante GET.
 exports.publisher_delete_get = asyncHandler(async (req, res, next) => {

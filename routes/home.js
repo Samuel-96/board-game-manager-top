@@ -10,6 +10,7 @@ const category_controller = require("../controllers/categoryController");
 
 // GET home page.
 router.get("/", boardgame_controller.index);
+router.get("/", boardgame_controller.indexSidebar);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get("/boardgame/create", boardgame_controller.boardgame_create_get);

@@ -1,6 +1,14 @@
 extends layout
 
 block content
-    div.bg-green-400
-        h1= title
-        p.text-4xl Welcome to #{title}
+    div.h-screen.bg-fondo.text-white.rounded
+        div.flex.text-center.justify-center.uppercase.p-2
+            p.text-4xl Welcome to the #{title}
+
+        h1.text-3xl.m-3= "Stats in database"
+        ul.m-3.flex.flex-col.gap-5
+            li #[strong Boardgames:] !{numBoardgames}
+            li #[strong Publishers:] !{numPublishers}
+            li #[strong Categories:] !{numCategories}
+        div.w-fit.bg-green-600.text-white.p-2.rounded.m-3
+            a(href="/home/boardgames") List of boardgames

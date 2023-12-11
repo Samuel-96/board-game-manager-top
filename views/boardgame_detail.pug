@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+
+    div.mb-5
+        img
+        h2.text-2xl.font-bold= boardgame.name
+        p.text-lg= boardgame.summary
+        p= boardgame.designers 
+        p= boardgame.artists
+        div.bg-red-700.text-white.p-2.rounded.w-fit
+            a(href="/home/boardgame/:"+boardgame.id+"/delete") Eliminar

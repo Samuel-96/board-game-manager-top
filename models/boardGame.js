@@ -11,7 +11,7 @@ const BoardgameSchema = new Schema({
     summary: { type: String },
     rating: {type: Number, default: 0},
     publisher: { type: Schema.Types.ObjectId, ref: "Publisher", required: true }, // referencia a Publisher
-    category: [{ type: Schema.Types.ObjectId, ref: "Category" }] // referencia a Category, un array porque puede tener varias
+    category: [{ type: Schema.Types.ObjectId, ref: "Category", required: true }] // referencia a Category, un array porque puede tener varias
 });
 
 // es buena práctica hacer funciones virtuales como url para obtenerla en otro
